@@ -1,0 +1,113 @@
+/* Radar Animation Styles - Flat Design */
+.radar-loader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+/* Concentric circles - flat style */
+.radar-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 185, 129, 0.2); /* Solid border instead of dashed */
+}
+
+.outer-circle {
+  inset: 0;
+}
+
+.middle-circle {
+  inset: 20%;
+}
+
+.inner-circle {
+  inset: 40%;
+}
+
+/* Rotating radar sweep - improved */
+.radar-sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  animation: radar-rotate 4s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.radar-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 90% 0%, 50% 0%);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+  z-index: 1;
+  border-radius: 50%;
+}
+
+/* Center icon container - flat design */
+.radar-center-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+@media (min-width: 768px) {
+  .radar-center-icon {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+/* Grid lines - flat style */
+.radar-grid-line {
+  position: absolute;
+  background-color: rgba(16, 185, 129, 0.1);
+  z-index: 3;
+}
+
+.radar-horizontal {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.radar-vertical {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+/* Animation keyframes */
+@keyframes radar-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
