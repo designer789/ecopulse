@@ -3,6 +3,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
+// Define a type for the globe methods we'll use
+interface GlobeMethods {
+  controls: () => {
+    autoRotate: boolean;
+    autoRotateSpeed: number;
+    enableZoom: boolean;
+    enablePan: boolean;
+    enableDamping: boolean;
+    dampingFactor: number;
+    mouseButtons: {
+      LEFT: number | null;
+      MIDDLE: number | null;
+      RIGHT: number | null;
+    };
+    enableTouch: boolean;
+    update: () => void;
+  };
+  pointOfView: (params: { lat: number; lng: number; altitude: number }) => void;
+}
+
 // Dynamic import for Globe
 const Globe = dynamic(
   () => import('react-globe.gl'),
@@ -10,7 +30,8 @@ const Globe = dynamic(
 );
 
 const GlobeTS: React.FC = () => {
-  const globeEl = useRef<any>(null);
+  // Using a specific ref type with type assertion when accessing methods
+  const globeEl = useRef<React.ReactNode>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -32,11 +53,11 @@ const GlobeTS: React.FC = () => {
   useEffect(() => {
     // Wait for the globe to be fully loaded
     const checkGlobe = setInterval(() => {
-      if (globeEl.current && globeEl.current.controls) {
+      if (globeEl.current && (globeEl.current as unknown as GlobeMethods).controls) {
         clearInterval(checkGlobe);
         
         // Configure controls
-        const controls = globeEl.current.controls();
+        const controls = (globeEl.current as unknown as GlobeMethods).controls();
         if (controls) {
           controls.autoRotate = true;
           controls.autoRotateSpeed = isMobile ? 0.6 : (isTablet ? 0.5 : 0.4);
@@ -57,7 +78,7 @@ const GlobeTS: React.FC = () => {
         }
         
         // Initial camera position - closer view for mobile/tablet
-        globeEl.current.pointOfView({
+        (globeEl.current as unknown as GlobeMethods).pointOfView({
           lat: 25,
           lng: 20,
           altitude: isMobile ? 1.8 : (isTablet ? 2.2 : 2.5)
@@ -65,8 +86,8 @@ const GlobeTS: React.FC = () => {
         
         // Animation loop
         const animate = () => {
-          if (globeEl.current && globeEl.current.controls) {
-            const controls = globeEl.current.controls();
+          if (globeEl.current && (globeEl.current as unknown as GlobeMethods).controls) {
+            const controls = (globeEl.current as unknown as GlobeMethods).controls();
             if (controls) {
               controls.update();
             }
@@ -114,7 +135,7 @@ const GlobeTS: React.FC = () => {
         transform: 'translate(-50%, -50%)'
       }}>
         <Globe
-          ref={globeEl}
+          ref={globeEl as React.RefObject<any>}
           globeImageUrl="/images/texture.png"
           bumpImageUrl="https://unpkg.com/three-globe/example/img/earth-topology.png"
           backgroundColor="rgba(0,0,0,0)"

@@ -62,7 +62,7 @@ const ProductFeatures: React.FC = () => {
             <span className="gradient-text">Product Features & Highlights</span>
           </h2>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg">
-            Join EcoPulse, where your everyday observations shape tomorrow's climate intelligence.
+            Join EcoPulse, where your everyday observations shape tomorrow&apos;s climate intelligence.
           </p>
         </div>
         

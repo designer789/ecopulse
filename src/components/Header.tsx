@@ -1,23 +1,22 @@
 "use client";
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   
-  // Navigation items matching all sections in the app
-  const navigationItems = [
+  // Navigation items wrapped in useMemo to prevent recreating on every render
+  const navigationItems = useMemo(() => [
     { name: 'Home', href: '#' },
     { name: 'Features', href: '#features' },
     { name: 'Roles', href: '#roles' },
     { name: 'Tokenomics', href: '#tokenomics' },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'FAQ', href: '#faq' }
-  ];
+  ], []);
   
   // Handle scroll events
   useEffect(() => {

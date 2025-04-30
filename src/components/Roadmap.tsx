@@ -4,13 +4,11 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface RoadmapPhaseProps {
   number: number;
-  title: string;
-  items: string[];
   isActive: boolean;
   onClick: () => void;
 }
 
-const RoadmapPhase: React.FC<RoadmapPhaseProps> = ({ number, title, items, isActive, onClick }) => (
+const RoadmapPhase: React.FC<RoadmapPhaseProps> = ({ number, isActive, onClick }) => (
   <div className="flex flex-col items-center">
     {/* Phase circle */}
     <button 
@@ -35,7 +33,6 @@ const RoadmapPhase: React.FC<RoadmapPhaseProps> = ({ number, title, items, isAct
 
 export default function Roadmap() {
   const [activePhase, setActivePhase] = useState(1);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true); // Keep autoplay enabled by default
   const [progressPercent, setProgressPercent] = useState(0);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   const phaseChangeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -143,7 +140,7 @@ export default function Roadmap() {
     };
     
     // Start animation
-    if (isAutoPlaying) {
+    if (true) { // Replace isAutoPlaying with true since we're always auto-playing
       animationFrameId = requestAnimationFrame(animateProgress);
     } else {
       // If not autoplaying, just set to the current phase
@@ -156,24 +153,24 @@ export default function Roadmap() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [activePhase, isAutoPlaying, calculateProgressPercentage, phases.length]);
+  }, [activePhase, calculateProgressPercentage, phases.length]);
 
   // Handle autoplay functionality
   useEffect(() => {
-    if (isAutoPlaying) {
-      startAutoPlayTimer();
-    }
+    startAutoPlayTimer();
     
     // Cleanup all timers on component unmount
     return () => {
       if (autoPlayTimerRef.current) {
         clearTimeout(autoPlayTimerRef.current);
       }
-      if (phaseChangeTimeoutRef.current) {
-        clearTimeout(phaseChangeTimeoutRef.current);
+      // Create a local copy of the ref value for cleanup
+      const phaseChangeTimeout = phaseChangeTimeoutRef.current;
+      if (phaseChangeTimeout) {
+        clearTimeout(phaseChangeTimeout);
       }
     };
-  }, [isAutoPlaying, activePhase, startAutoPlayTimer]);
+  }, [activePhase, startAutoPlayTimer]);
 
   // Handle manual phase click
   const handlePhaseClick = (phaseNumber: number) => {
@@ -229,8 +226,6 @@ export default function Roadmap() {
                 <RoadmapPhase
                   key={phase.number}
                   number={phase.number}
-                  title={phase.title}
-                  items={phase.items}
                   isActive={activePhase === phase.number}
                   onClick={() => handlePhaseClick(phase.number)}
                 />

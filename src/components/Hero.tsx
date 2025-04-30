@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import SlideRotateText from './SlideRotateText';
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
@@ -77,6 +76,19 @@ export default function Hero() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
             </a>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mt-2 sm:mt-3">
+            <button 
+              className="border border-primary/30 text-primary rounded-full px-5 sm:px-6 py-2.5 sm:py-3 hover:bg-primary/5 transition-colors flex items-center justify-center gap-1 font-medium text-sm sm:text-base"
+            >
+              DEXTools
+            </button>
+            <button 
+              className="border border-secondary/30 text-secondary rounded-full px-5 sm:px-6 py-2.5 sm:py-3 hover:bg-secondary/5 transition-colors flex items-center justify-center gap-1 font-medium text-sm sm:text-base"
+            >
+              DEX Screener
+            </button>
           </div>
         </div>
 
