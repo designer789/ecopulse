@@ -23,6 +23,19 @@ interface GlobeMethods {
   pointOfView: (params: { lat: number; lng: number; altitude: number }) => void;
 }
 
+interface GlobeProps {
+  ref: React.RefObject<unknown>;
+  globeImageUrl: string;
+  bumpImageUrl: string;
+  backgroundColor: string;
+  width: number;
+  height: number;
+  animateIn: boolean;
+}
+
+// Create a type that allows us to use the ref without an explicit any
+type GlobeRef = unknown;
+
 // Dynamic import for Globe
 const Globe = dynamic(
   () => import('react-globe.gl'),
@@ -31,7 +44,7 @@ const Globe = dynamic(
 
 const GlobeTS: React.FC = () => {
   // Using a specific ref type with type assertion when accessing methods
-  const globeEl = useRef<React.ReactNode>(null);
+  const globeEl = useRef<GlobeRef>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -135,7 +148,8 @@ const GlobeTS: React.FC = () => {
         transform: 'translate(-50%, -50%)'
       }}>
         <Globe
-          ref={globeEl as React.RefObject<any>}
+          // @ts-expect-error Using dynamic import with ref requires type assertion
+          ref={globeEl}
           globeImageUrl="/images/texture.png"
           bumpImageUrl="https://unpkg.com/three-globe/example/img/earth-topology.png"
           backgroundColor="rgba(0,0,0,0)"

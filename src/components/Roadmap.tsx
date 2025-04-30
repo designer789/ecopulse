@@ -35,7 +35,6 @@ export default function Roadmap() {
   const [activePhase, setActivePhase] = useState(1);
   const [progressPercent, setProgressPercent] = useState(0);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const phaseChangeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const phases = [
     {
@@ -163,11 +162,6 @@ export default function Roadmap() {
     return () => {
       if (autoPlayTimerRef.current) {
         clearTimeout(autoPlayTimerRef.current);
-      }
-      // Create a local copy of the ref value for cleanup
-      const phaseChangeTimeout = phaseChangeTimeoutRef.current;
-      if (phaseChangeTimeout) {
-        clearTimeout(phaseChangeTimeout);
       }
     };
   }, [activePhase, startAutoPlayTimer]);
