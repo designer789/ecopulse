@@ -23,16 +23,6 @@ interface GlobeMethods {
   pointOfView: (params: { lat: number; lng: number; altitude: number }) => void;
 }
 
-interface GlobeProps {
-  ref: React.RefObject<unknown>;
-  globeImageUrl: string;
-  bumpImageUrl: string;
-  backgroundColor: string;
-  width: number;
-  height: number;
-  animateIn: boolean;
-}
-
 // Create a type that allows us to use the ref without an explicit any
 type GlobeRef = unknown;
 
