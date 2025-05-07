@@ -59,12 +59,7 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mt-6 sm:mt-8 md:mt-10">
-            <button className="gradient-bg text-white rounded-full px-5 sm:px-6 py-2.5 sm:py-3 hover:opacity-90 transition-opacity flex items-center justify-center gap-1 font-medium text-sm sm:text-base">
-              Get Started
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 sm:w-4 sm:h-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-              </svg>
-            </button>
+           
             <a 
               href="https://ecopulse.gitbook.io/docs" 
               target="_blank" 
