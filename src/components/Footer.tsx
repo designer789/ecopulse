@@ -91,7 +91,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://t.me/EcoPulse_Official" 
+                href="https://t.me/EcoPulse_Portal" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-primary transition-colors"
