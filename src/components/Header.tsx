@@ -137,7 +137,7 @@ export default function Header() {
               Twitter
             </a>
             <a 
-              href="https://t.me/EcoPulse_Official" 
+              href="https://t.me/EcoPulse_Portal" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-primary to-secondary text-white text-xs lg:text-sm font-medium px-3 lg:px-4 py-1.5 lg:py-2 rounded-full hover:opacity-90 transition-opacity"
